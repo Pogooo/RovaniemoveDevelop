@@ -1,0 +1,82 @@
+<div class="input-group searchdiv">
+	<input type="text" ng-enter="searchEnter()" class="form-control" placeholder="Haku" name="srch-term" id="srch-term" ng-model="search">
+	<div class="input-group-btn">
+			<button class="btn btn-default" ui-sref="user.profile({userName: search})">
+			<i class="fa fa-search" aria-hidden="true"></i></button>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-md-4 col-xs-5">
+		<input type="image" id="profilePicture" class="img-responsive" ng-click="onClickPicture()" width="200" height="200"><br>
+	</div>
+	<div style="text-align: center" class="col-md-4 col-xs-7">
+		<p><span id="username">{{username}}</span> 
+			<span ng-if="searchForAnother != ''" ui-sref="user.profile({userName: ''})">
+				<i class="fa fa-sign-out" aria-hidden="true"></i>
+			</span>
+		</p>
+		<p>
+			<span ng-hide="time == $0">{{time}} Pisteet</span>
+			<span ng-show="time == $0">0 Pisteet</span>
+		</p>
+		<p>
+			<span id="rank" ng-hide="time == $0">5.</span>
+		</p>
+	</div>
+			<div style="text-align: center" class="col-md-4 col-xs-12">
+					Liikunta tänään:<br>
+			<round-progress
+    max="180"
+    current="timeDay"
+    color="#64B058"
+    bgcolor="#eaeaea"
+    stroke="5"
+		radius="35"
+    rounded="true"
+    clockwise="true"
+    responsive="false"
+    duration="800"
+    animation="easeInOutQuart"
+    animation-delay="0"> {{timeDay}}/{{180}}</round-progress>
+	</div>
+<!-- 			<uib-progressbar type="danger" animation="true" value="timeDay" type="info"><b>{{timeDay | number:0}}%</b></uib-progressbar> -->
+</div>
+<hr>
+<div ng-hide="showActivity">
+	<h2 ng-click="showActivity = true" style="text-align: center">Saavutukset</h2><br>
+	<div height="auto" style="horizontal-align: middle; vertical-align: middle; text-align: center">
+		<div ng-repeat="achivement in achievementsList" id="{{achivement.name}}" class="achivement-medal">
+			<image class="img-responsive" src="img/medal.png" /><br>
+			<!-- 
+			This would be better:
+			<image class="img-responsive" src="{{achivement.pictureurl}}" /> -->
+			<center>{{achivement.name}}</center><br>
+			<center><i>{{achivement.date}}</i></center>
+		</div>
+	</div>
+</div>
+<div ng-show="showActivity">
+	<h2 ng-click="showActivity = false" style="text-align: center">Activities</h2><br>
+	<table id="activitiestable" class="table table-striped">
+	<thead>
+		<tr class="rankingName">
+			<td>Nimi</td>
+			<td>Level</td>
+			<td>Dur.</td>
+			<td>Date</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="entity in activities | orderBy: '-datetime'">
+			<td class="col-xs-5">
+				<span> {{entity.name}}
+				</span>
+			</td>
+			<td class="col-xs-1">{{entity.level = 1 ? 'E' : 'H'}}</td>
+			<td class="col-xs-2">{{entity.duration}}</td>
+			<td class="col-xs-4">{{entity.datetime}}</td>
+		</tr>
+	</tbody>
+	</table>
+</div>

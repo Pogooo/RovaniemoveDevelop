@@ -1,0 +1,15 @@
+<br>
+<div class="col-lg-12">
+    <br><ul class="nav nav-tabs nav-justified">
+        <li ng-class="{'active': currenttable == 'user'}"><a ng-click="tableChange('user')">Opiskelija</a></li>
+        <li ng-class="{'active': currenttable == 'classroom'}"><a ng-click="tableChange('classroom')">Luokka</a></li>
+        <li ng-class="{'active': currenttable == 'school'}"><a ng-click="tableChange('school')">Koulu</a></li>
+        <li ng-class="{'active': currenttable == 'sport'}"><a ng-click="tableChange('sport')">Liikunta</a></li>
+        <li ng-class="{'active': currenttable == 'achievement'}"><a ng-click="tableChange('achievement')">Saavutukset</a></li>
+    </ul>
+    <div>
+        <div class="list-group" ng-repeat="entity in itemsList | orderBy: '-name'">
+            <button type="button" class="list-group-item" ng-click="onItemClick(entity.id)">{{entity.name}}</button>
+        </div>
+    </div>
+</div>

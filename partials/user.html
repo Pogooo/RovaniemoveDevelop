@@ -1,0 +1,25 @@
+<div class="col-md-2"></div>
+<div class="col-md-8">
+	<div class="image"><img class="logo img-responsive align-to-center" width="400px" src="img/logo_line.png"/></div>
+	<nav style="text-align: center" class="navbar navbar-default">
+			<ul class="nav navbar-nav">
+				<li class="menuspace-item" ui-sref-active="active" ui-sref="user.profile"><a data-toggle="tab"><i class="fa fa-user fa-3x" aria-hidden="true"></i></a></li>
+				<li class="menuspace-item" ui-sref-active="active" ui-sref="user.events"><a data-toggle="tab"><i class="fa fa-calendar fa-3x" aria-hidden="true"></i></a></li>
+				<li class="menuspace-item" ui-sref-active="active" ui-sref="user.ranking"><a data-toggle="tab"><i class="fa fa-trophy fa-3x" aria-hidden="true"></i></a></li>
+				<li class="menuspace-item" ui-sref-active="active" ui-sref="user.settings"><a data-toggle="tab"><i class="fa fa-3x fa-cogs" aria-hidden="true"></i></a></li>
+<!-- 				<li class="menuspace-item dropdown" uib-dropdown>
+					<a class="dropdown-toggle" uib-dropdown-toggle>
+					<i class="fa fa-3x fa-cogs"></i>
+					<ul class="dropdown-menu mine-drop" role="menu">
+						<li ui-sref-active="active" ui-sref="user.settings"><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>Muokkaa</a></li>
+						<li ui-sref-active="active" ui-sref="user.logout"><a data-toggle="tab"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i>Kirjaudu ulos</a></li>
+						<li ng-if="admin != 0" ui-sref-active="active" ui-sref="admin.add"><a data-toggle="tab"><i class="fa fa-wrench fa-2x" aria-hidden="true"></i>Ylläpito</a></li>
+					</ul>
+				</li> -->
+			</ul>
+	</nav>
+	<div class="rov-content">
+		<div ui-view="menucontent" ></div>
+		<div class="row"> </div>
+	</div>
+</div>

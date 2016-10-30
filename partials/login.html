@@ -1,0 +1,22 @@
+<div id="verticalCenterContent">
+	<div class="image"><img class="logo img-responsive align-to-center" width="400px" src="img/logo_line.png"/></div>
+	<div class="col-md-3">
+	</div>
+	<div class="col-md-6 col-xs-12 vcenter rov-content" id="showlogin">
+
+		<form id="loginForm">
+			<div class="form-group">
+				<label for="loginname">Käyttäjätunnus</label>
+				<input id="loginname" class="form-control" ng-model="username"/><br>
+				<label for="loginpw">Salasana</label>
+				<input id="loginpw" ng-enter="onLoginClick()" class="form-control" type="password" ng-model="password"/>
+				<br><br>
+				<input id="loginname" type="button" class="btn btn-primary btn-block" value="Kirjaudu" ng-click="onLoginClick()"/>
+			</div>
+			<div>
+				<input type="button" class="btn btn-primary btn-block" value="Rekisteröidy" ui-sref="register"/>
+				{{result}}
+			</div>
+		</form>		
+	</div>
+</div>
