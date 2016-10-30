@@ -424,6 +424,10 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 					.success(function(data, status, headers) {
 						$scope.activities = data.Activities;
 					});
+					$http.get('http://89.90.16.70/Rovaniemove/API/rank/' + $scope.userid)
+					.success(function(data, status, headers) {
+						$scope.rank = data.Rank;
+					});
         }
 				else{
 					$state.go("user.error");
@@ -464,6 +468,10 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 		$http.get('http://89.90.16.70/Rovaniemove/API/activities/' + sharedUser.getUserID())
 		.success(function(data, status, headers) {
 			$scope.activities = data.Activities;
+		});
+		$http.get('http://89.90.16.70/Rovaniemove/API/rank/' + sharedUser.getUserID())
+		.success(function(data, status, headers) {
+			$scope.rank = data.Rank;
 		});
 	}
 	

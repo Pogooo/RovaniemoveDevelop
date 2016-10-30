@@ -21,7 +21,7 @@
 			<span ng-show="time == $0">0 Pisteet</span>
 		</p>
 		<p>
-			<span id="rank" ng-hide="time == $0">5.</span>
+			<span id="rank">{{rank}}.</span>
 		</p>
 	</div>
 			<div style="text-align: center" class="col-md-4 col-xs-12">
@@ -45,6 +45,7 @@
 <hr>
 <div ng-hide="showActivity">
 	<h2 ng-click="showActivity = true" style="text-align: center">Saavutukset</h2><br>
+<!-- 	{{activities}} -->
 	<div height="auto" style="horizontal-align: middle; vertical-align: middle; text-align: center">
 		<div ng-repeat="achivement in achievementsList" id="{{achivement.name}}" class="achivement-medal">
 			<image class="img-responsive" src="img/medal.png" /><br>
@@ -70,7 +71,7 @@
 	<tbody>
 		<tr ng-repeat="entity in activities | orderBy: '-datetime'">
 			<td class="col-xs-5">
-				<span> {{entity.name}}
+				<span> {{entity.sportName}}
 				</span>
 			</td>
 			<td class="col-xs-1">{{entity.level = 1 ? 'E' : 'H'}}</td>
