@@ -1,0 +1,15 @@
+1 minute = 10 pts (20 in hard) FINISH
+Display earned points for each activity FINISH
+No top list with student name FINISH
+Remove activity create in admin page FINISH
+
+
+- School and Classroom rank in minutes not in points (server side)
+- Add progress bar for week activity (request /time/{id}.  data.timeWeek)
+- On profile page maybe increase the width of the big blank div 
+- Display % for progress bar 
+- Remove rank
+- Add user/admin in admin page create user
+- In setting page add mode sick
+- finish all translation
+- date format on profile page 

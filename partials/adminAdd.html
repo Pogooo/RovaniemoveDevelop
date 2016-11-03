@@ -36,7 +36,7 @@
     <!-- ADD SCHOOL -->
     <div class="col-md-6">
       <div class="panel panel-success">
-        <div class="panel-heading">Lisää koulu (school)</div>
+        <div class="panel-heading">Lisää koulu</div>
         <div class="panel-body">
           <input class="form-control" type="text" ng-model="schoolname" placeholder="Koulu nimi"><br>
           <input type="button" class="btn btn-primary btn-block" value="Lisää koulu" ng-click="onAddSchoolClick()"/>
@@ -73,35 +73,10 @@
       </div>
     </div>
 
-    <!-- ADD ACTIVITY -->
-    <div class="col-md-6">
-      <div class="panel panel-danger">
-        <div class="panel-heading">Lisää aktiviteetti</div>
-        <div class="panel-body">
-          <label for="newsportselect">Liikunta</label>
-          <select class="form-control" ng-model="sport" ng-options="sport.sportID as sport.name for sport in sportsList"></select><br>
-          <span ng-show="sport">
-            <input class="form-control" ng-model="name" placeholder="Nimi"/><br>
-          </span>
-          <label for="newduration">Kesto</label>
-          <select id="newduration" type="number" class="form-control" ng-model="duration" required>
-            <option ng-repeat="duration in durations" value="{{duration}}">{{duration}}"</option>
-          </select><br>
-          <label>Vaikeustaso</label><br>
-          <label class="radio-inline">
-          <input type="radio" ng-model="level" value="E" checked>Kevyt</label>
-          <label class="radio-inline">
-          <input type="radio" ng-model="level" value="H">Raskas</label><br><br>
-          <input type="button" class="btn btn-primary btn-block" value="Add Activity" ng-click="onAddActivityClick()"/>
-          {{activity_result}}
-        </div>
-      </div>
-    </div>
-
     <!-- ADD SPORT -->
     <div class="col-md-6">
       <div class="panel panel-primary">
-        <div class="panel-heading">Lisää liikunta (sport)</div>
+        <div class="panel-heading">Lisää liikunta</div>
         <div class="panel-body">
           <input class="form-control" type="text" ng-model="sportname" placeholder="Liikunta Nimi"><br>
           <input type="button" class="btn btn-primary btn-block" value="Lisää liikunta" ng-click="onAddSportClick()"/>

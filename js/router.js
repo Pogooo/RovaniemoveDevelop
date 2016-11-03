@@ -468,7 +468,16 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 		$http.get('http://89.90.16.70/Rovaniemove/API/activities/' + sharedUser.getUserID())
 		.success(function(data, status, headers) {
 			$scope.activities = data.Activities;
+
+      for (i = 0; i < $scope.activities.length; i ++) {
+        if($scope.activities[i]['level'] == 1 || $scope.activities[i]['level'] == '1') {
+          $scope.activities[i]['points']  = parseInt($scope.activities[i]['duration']) * 10;
+        } else if($scope.activities[i]['level'] == 2 || $scope.activities[i]['level'] == '2'){
+          $scope.activities[i]['points']  = parseInt($scope.activities[i]['duration']) * 20;
+        }
+      }
 		});
+
 		$http.get('http://89.90.16.70/Rovaniemove/API/rank/' + sharedUser.getUserID())
 		.success(function(data, status, headers) {
 			$scope.rank = data.Rank;
@@ -793,9 +802,9 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 
 // Ranking Controller
 .controller('RankingCtr', function($scope, $http) {
-  $scope.currenttable = "student";
+  $scope.currenttable = "school";
 
-  $http.get('http://89.90.16.70/Rovaniemove/API/ranking/student')
+  $http.get('http://89.90.16.70/Rovaniemove/API/ranking/school')
 	.success(function(data, status, headers) {
     if(data.Success == 1) {
       $scope.tabledata = data.Result;
@@ -905,49 +914,6 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
     });
   }
 
-  $scope.onAddActivityClick = function() {
-    $scope.activity_result  = '';
-
-    if($scope.sport && $scope.duration && $scope.level) {
-      $level  = 1;
-
-      if($scope.level == 'H') {
-        $level  = 2;
-      }
-
-      $date       = new Date();
-      $month      = parseInt($date.getMonth());
-
-      if($month == 11) {
-        $month  = 0;
-      } else {
-        $month++;
-      }
-        
-      $dateTime   = $date.getFullYear() + '-' + $month + '-' + $date.getDate() + ' ' + $date.getHours() + ':' + $date.getMinutes() + ':' + $date.getSeconds();
-
-      $params = {
-        'name': $scope.name, 
-        'sportID': $scope.sport,
-        'datetime': $dateTime, 
-        'duration': $scope.duration, 
-        'level': $level, 
-        'userID': sharedUser.getUserID()
-      };
-            
-      $http.post('http://89.90.16.70/Rovaniemove/API/activities', $params)
-      .success(function(data, status, headers) {
-        $scope.activity_result  = data.Message;
-        $scope.name     = '';
-        $scope.sport    = '';
-        $scope.duration = '';
-        $scope.level    = '';
-      });
-    } else {
-      $scope.activity_result  = 'Täytä kaikki kentät';
-    }
-  }
-
   $scope.onAddUserClick  = function(view) {
     $scope.user_result  = '';
 
@@ -1017,7 +983,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
     }
   }
 
-// TODO
+
   $scope.onAddAchievementClick  = function() {
     $scope.achievement_result  = '';
 

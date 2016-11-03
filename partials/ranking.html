@@ -1,5 +1,4 @@
 <br><ul class="nav nav-tabs nav-justified">
-  <li ng-class="{'active': currenttable == 'student'}"><a ng-click="tableChange('student')">Opiskelija</a></li>
   <li ng-class="{'active': currenttable == 'class'}"><a ng-click="tableChange('class')">Luokka</a></li>
   <li ng-class="{'active': currenttable == 'school'}"><a ng-click="tableChange('school')">Koulu</a></li>
 </ul>
@@ -15,8 +14,6 @@
 	<tr ng-repeat="entity in tabledata | orderBy: '-score'">
 		<td class="col-xs-1">{{$index + 1}}</td>
 		<td class="col-xs-7">
-			<a ng-if="currenttable == 'student'" ui-sref="user.profile({userName: entity.name})"> {{entity.name}}
-			</a>
 			<span ng-if="currenttable != 'student'"> {{entity.name}}
 			</span>
 		</td>
