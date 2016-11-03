@@ -1021,18 +1021,19 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
   $scope.onAddAchievementClick  = function() {
     $scope.achievement_result  = '';
 
-    if($scope.achievementName && $scope.description && $scope.limit) {
-      if(!isNan($scope.limit)) {
-        $http.post('http://89.90.16.70/Rovaniemove/API/achievements', {'name': $scope.achievementName, 'description': $scope.description, 'limit': $scope.limit})
+    if($scope.achievementName && $scope.description && $scope.limite) {
+      if(typeof($scope.limite) == 'number') {
+        $http.post('http://89.90.16.70/Rovaniemove/API/achievements', {'name': $scope.achievementName, 'description': $scope.description, 'limit': $scope.limite})
         .success(function(data, status, headers) {
           $scope.achievement_result = data.Message;
           
           $scope.achievementName  = '';
           $scope.description      = '';
-          $scope.limit            = '';
+          $scope.limite            = '';
         }); 
       } else {
         $scope.achievement_result = 'Raja ei ole numero';
+        $scope.limite            = '';
       }
     } 
     else {
