@@ -1,9 +1,14 @@
 <div class="container">
-	<a data-toggle="tab" ui-sref-active="active" ui-sref="user.logout"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i>Kirjaudu ulos</a><br>
+	<a data-toggle="tab" ui-sref-active="active" ui-sref="user.logout"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i>Kirjaudu ulos</a>
 	<a data-toggle="tab" ng-if="admin != 0" ui-sref-active="active" ui-sref="admin.add"><i class="fa fa-wrench fa-2x" aria-hidden="true"></i>Ylläpito</a>
 </div>
 <div class="col-xs-12 vcenter" >
 	<form>
+		<h3>Sairas</h3><br>
+		{{result_sick}}
+		<br><input type="checkbox" ng-model="sickBox" ng-true-value="1" ng-false-value="0" ng-change="onSickChange()"> Tarkista jos olet sairas<br>
+		
+		<hr>
 		<h3>Vaihda salasana</h3><br>
 		<label for="oldpass">Nykyinen salasana</label>
 		<input id="oldpass" class="form-control" type="password" ng-model="password.old"><br>
@@ -11,11 +16,13 @@
 		<input id="newpass1" class="form-control" type="password" ng-model="password.new1"><br>
 		<label for="newpass2">Toista uusi salasana</label>
 		<input id="newpass2" class="form-control" type="password" ng-model="password.new2"><br>
-		<input type="button" class="btn btn-primary btn-block" value="Vaihda salasana" ng-click="onClickPasswordChange()"/>
 		{{result}}
+		<input type="button" class="btn btn-primary btn-block" value="Vaihda salasana" ng-click="onClickPasswordChange()"/>
+		
 		<hr>
 		<h3>Palaute</h3><br>
 		<textarea class="form-control" style="min-width: 100%" ng-model="feedback" placeholder="Arvostamme palautettasi, kiitos"></textarea><br>
+		{{result_feedback}}
 		<input type="button" class="btn btn-primary btn-block" value="Lähetä palaute" ng-click="onClickFeedback()"/><br>
 	</form>
 </div>

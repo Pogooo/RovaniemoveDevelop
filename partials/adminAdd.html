@@ -15,8 +15,6 @@
             <input id="firstname" class="form-control" type="text" ng-model="firstname" placeholder="Etunimi"><br>
             <input id="lastname" class="form-control" type="text" ng-model="lastname" placeholder="Sukunimi"><br>
             <input id="username" class="form-control" type="text" ng-model="username" placeholder="Käyttäjätunnus"><br>
-            <label for="birthday">Syntymäaika</label>
-            <input id="birthday" class="form-control" type="date" ng-model="birthday"><br>
             
             <label for="schoolselect">Koulu</label>
             <select id="schoolselect" class="form-control" ng-model="school" ng-options="school.schoolID as school.name for school in schoolsList" ng-change="changed()"></select><br>
@@ -26,9 +24,11 @@
             </span>
             <input id="password1" class="form-control" type="password" ng-model="password" placeholder="Salasana"><br>
             <input id="password2" class="form-control" type="password" ng-model="passwordCheck" placeholder="Sala uudestaan"><br>
+            <input id="admin0" type="radio" ng-model="admin" value="0" checked>User</label>
+            <input id="admin1" type="radio" ng-model="admin" value="1">Admin</label><br>
             <br><input type="button" class="btn btn-primary btn-block" value="Rekisteröidy" ng-click="onAddUserClick()"/>
-            {{user_result}}
           </form>
+          <center>{{user_result}}</center>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
         <div class="panel-body">
           <input class="form-control" type="text" ng-model="schoolname" placeholder="Koulu nimi"><br>
           <input type="button" class="btn btn-primary btn-block" value="Lisää koulu" ng-click="onAddSchoolClick()"/>
-          {{school_result}}
+          <center>{{school_result}}</center>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <select id="schoolselect" class="form-control" ng-model="schoolAddClass" ng-options="school.schoolID as school.name for school in schoolsList" ng-change="classSchoolChanged()"></select><br>
           <input class="form-control" type="text" ng-model="classroomname" placeholder="Luokka nimi"><br>
           <input type="button" class="btn btn-primary btn-block" value="Lisää luokka" ng-click="onAddClassroomClick()"/>
-          {{classroom_result}}
+          <center>{{classroom_result}}</center>
         </div>
       </div>
     </div>
@@ -68,19 +68,19 @@
           <input type="number" ng-model="limite" min="1" max="100000" placeholder="Raja"><br><br>
           <input class="form-control" type="text" ng-model="description" placeholder="Kuvaus..."><br>
           <input type="button" class="btn btn-primary btn-block" value="Lisää Saavutukset" ng-click="onAddAchievementClick()"/>
-          {{achievement_result}}
+          <center>{{achievement_result}}</center>
         </div>
       </div>
     </div>
 
     <!-- ADD SPORT -->
     <div class="col-md-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-danger">
         <div class="panel-heading">Lisää liikunta</div>
         <div class="panel-body">
           <input class="form-control" type="text" ng-model="sportname" placeholder="Liikunta Nimi"><br>
           <input type="button" class="btn btn-primary btn-block" value="Lisää liikunta" ng-click="onAddSportClick()"/>
-          {{sport_result}}
+          <center>{{sport_result}}</center>
         </div>
       </div>
     </div>

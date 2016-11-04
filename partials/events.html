@@ -1,21 +1,17 @@
 <form id="loginForm">
-		<div id="form-group">			
-			<label for="newsportselect">Liikunta</label>
-			<select id="newsportselect" class="form-control" ng-model="sport" ng-options="sport.sportID as sport.name for sport in sportsList"></select><br>
-			<span ng-show="sport">
-				<label for="neweventname">Nimi</label>
-				<input id="neweventname" class="form-control" ng-model="name"/><br>
-			</span>
-			<label for="newduration">Kesto</label>
-			<select id="newduration" type="number" class="form-control" ng-model="duration" required>
-				<option ng-repeat="duration in durations" value="{{duration}}">{{duration}}"</option>
-			</select><br>
-			<label>Vaikeustaso</label><br>
-			<label class="radio-inline">
-			<input type="radio" ng-model="level" value="E" checked>Kevyt</label>
-			<label class="radio-inline">
-			<input type="radio" ng-model="level" value="H">Raskas</label><br><br>
-			{{result}}
-			<input type="button" class="btn btn-primary btn-block" value="Lisää aktiviteetti" ng-click="onAddClick()"/>
-		</div>
-	</form>	
+	<div id="form-group">			
+		<label for="newsportselect">Liikunta</label>
+		<select id="newsportselect" class="form-control" ng-model="sport" ng-options="sport.sportID as sport.name for sport in sportsList"></select><br>
+		<label for="newduration">Kesto minuutteina</label>
+		<select id="newduration" type="number" class="form-control" ng-model="duration" required>
+			<option ng-repeat="duration in durations" value="{{duration}}">{{duration}}</option>
+		</select><br>
+		<label>Vaikeustaso</label><br>
+		<label class="radio-inline">
+		<input type="radio" ng-model="level" value="E" checked>Kevyt</label>
+		<label class="radio-inline">
+		<input type="radio" ng-model="level" value="H">Raskas</label><br><br>
+		{{result}}
+		<input type="button" class="btn btn-primary btn-block" value="Lisää aktiviteetti" ng-click="onAddClick()"/>
+	</div>
+</form>	

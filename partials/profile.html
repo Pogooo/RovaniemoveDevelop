@@ -11,7 +11,7 @@
 		<input type="image" id="profilePicture" class="img-responsive" ng-click="onClickPicture()" width="200" height="200"><br>
 	</div>
 	<div style="text-align: center" class="col-md-4 col-xs-7">
-		<p><span id="username">{{username}}</span> 
+		<p><span id="username" style="font-weight: bold">{{username}}</span> 
 			<span ng-if="searchForAnother != ''" ui-sref="user.profile({userName: ''})">
 				<i class="fa fa-sign-out" aria-hidden="true"></i>
 			</span>
@@ -20,62 +20,74 @@
 			<span ng-hide="time == $0">{{time}} Pisteet</span>
 			<span ng-show="time == $0">0 Pisteet</span>
 		</p>
-		<p>
-			<span id="rank">{{rank}}.</span>
-		</p>
 	</div>
-			<div style="text-align: center" class="col-md-4 col-xs-12">
-					Liikunta tänään:<br>
+	<div style="text-align: center" class="col-md-4 col-xs-12"><br>
+		<div class="col-md-6"> Liikunta tänään: {{timeDay}}" ({{timeDayP}}%)
 			<round-progress
-    max="180"
-    current="timeDay"
-    color="#64B058"
-    bgcolor="#eaeaea"
-    stroke="5"
-		radius="35"
-    rounded="true"
-    clockwise="true"
-    responsive="false"
-    duration="800"
-    animation="easeInOutQuart"
-    animation-delay="0"> {{timeDay}}/{{180}}</round-progress>
+				max="180"
+				current="timeDay"
+				color="#64B058"
+				bgcolor="#eaeaea"
+				stroke="5"
+					radius="50"
+				rounded="true"
+				clockwise="true"
+				responsive="false"
+				duration="800"
+				animation="easeInOutQuart"
+				animation-delay="0">
+			</round-progress>
+		</div>
+
+		<div class="col-md-6"> Liikunta viikko: {{timeWeek}}" ({{timeWeekP}}%)
+			<round-progress
+				max="1260"
+				current="timeWeek"
+				color="#64B058"
+				bgcolor="#eaeaea"
+				stroke="5"
+					radius="50"
+				rounded="true"
+				clockwise="true"
+				responsive="false"
+				duration="800"
+				animation="easeInOutQuart"
+				animation-delay="0">
+			</round-progress>
+		</div>
 	</div>
-<!-- 			<uib-progressbar type="danger" animation="true" value="timeDay" type="info"><b>{{timeDay | number:0}}%</b></uib-progressbar> -->
 </div>
 <hr>
 <div ng-hide="showActivity">
 	<h2 ng-click="showActivity = true" style="text-align: center">Saavutukset</h2><br>
 	<div height="auto" style="horizontal-align: middle; vertical-align: middle; text-align: center">
 		<div ng-repeat="achivement in achievementsList" id="{{achivement.name}}" class="achivement-medal">
-			<image class="img-responsive" src="img/medal.png" /><br>
-			<!-- 
-			This would be better:
-			<image class="img-responsive" src="{{achivement.pictureurl}}" /> -->
+			<image class="img-responsive" src="img/medal-2.png" /><br>
 			<center>{{achivement.name}}</center><br>
 			<center><i>{{achivement.date}}</i></center>
 		</div>
 	</div>
 </div>
 <div ng-show="showActivity">
-	<h2 ng-click="showActivity = false" style="text-align: center">Activities</h2><br>
+	<h2 ng-click="showActivity = false" style="text-align: center">Aktiviteetti</h2><br>
 	<table id="activitiestable" class="table table-striped">
 	<thead>
-		<tr class="rankingName">
+		<tr class="rankingName" style="text-align: center" style="font-size: 90%">
 			<td>Nimi</td>
 			<td>Pisteet</td>
-			<td>Dur.</td>
-			<td>Date</td>
+			<td>Kesto</td>
+			<td>Päivä</td>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody style="font-size: 90%">
 		<tr ng-repeat="entity in activities | orderBy: '-datetime'">
-			<td class="col-xs-5">
+			<td style="text-align: center">
 				<span> {{entity.sportName}}
 				</span>
 			</td>
-			<td class="col-xs-1">{{entity.points}}</td>
-			<td class="col-xs-2">{{entity.duration}}</td>
-			<td class="col-xs-4">{{entity.datetime}}</td>
+			<td style="text-align: center">{{entity.points}}</td>
+			<td style="text-align: center">{{entity.duration}}</td>
+			<td style="text-align: center">{{entity.datetime}}</td>
 		</tr>
 	</tbody>
 	</table>

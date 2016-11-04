@@ -208,6 +208,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
   var schoolID;
   var profilePicture;
 	var admin;
+  var sick;
 
   return {
     getUserID: function() {
@@ -231,6 +232,9 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
     getProfilePicture: function() {
       return profilePicture;
     },
+    getSick: function() {
+      return sick;
+    },
     setUserID: function(_userID) {
       userID  = _userID;
     },
@@ -251,6 +255,9 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
     },
 		setAdmin: function(_admin) {
       admin  = _admin;
+    },
+    setSick: function(_sick) {
+      sick  = _sick;
     }
   }
 })
@@ -305,7 +312,8 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
           'schoolID': $scope.school,
           'classroomID': $scope.classroom,
           'password': $scope.password,
-          'admin': 0
+          'admin': 0,
+          'sick': 0
         };
 
         $http.post('http://89.90.16.70/Rovaniemove/API/register', $params)
@@ -355,6 +363,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
           sharedUser.setClassroomID(data.User['classroom']);
           sharedUser.setProfilePicture(data.User['pictureUrl']);
 					sharedUser.setAdmin(data.User['admin']);
+          sharedUser.setSick(data.User['sick']);
 
           $state.go('user.profile');
         }else {
@@ -399,6 +408,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
           $scope.username     = data.User[0]['username'];
           $scope.time         = data.User[0]['points'];
           var timeDay         = data.User[0]['SUM(duration)'];
+          var timeWeek        = data.TimeWeek[0]['SUM(duration)'];
 					$scope.userid       = data.User[0]['userID'];
 
 					if(data.User[0]['pictureUrl'] == null) {
@@ -413,8 +423,16 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
             timeDay  = 180;
           }
 
-          //$scope.timeDay = timeDay / 180 * 100;
-					$scope.timeDay = timeDay;
+          if(!timeWeek)
+            timeWeek  = 0;
+          else if(timeWeek > 1260) {
+            timeWeek  = 1260;
+          }
+
+					$scope.timeDayP   = Math.floor(timeDay/1.8);
+          $scope.timeWeekP  = Math.floor(timeWeek/12.6);
+          $scope.timeDay    = timeDay;
+          $scope.timeWeek   = timeWeek;
 					
 					$http.get('http://89.90.16.70/Rovaniemove/API/achievements/' + $scope.userid)
 					.success(function(data, status, headers) {
@@ -423,10 +441,15 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 					$http.get('http://89.90.16.70/Rovaniemove/API/activities/' + $scope.userid)
 					.success(function(data, status, headers) {
 						$scope.activities = data.Activities;
-					});
-					$http.get('http://89.90.16.70/Rovaniemove/API/rank/' + $scope.userid)
-					.success(function(data, status, headers) {
-						$scope.rank = data.Rank;
+
+            for (i = 0; i < $scope.activities.length; i ++) {
+              if($scope.activities[i]['level'] == 1 || $scope.activities[i]['level'] == '1') {
+                $scope.activities[i]['points']  = parseInt($scope.activities[i]['duration']) * 10;
+              } 
+              else if($scope.activities[i]['level'] == 2 || $scope.activities[i]['level'] == '2'){
+                $scope.activities[i]['points']  = parseInt($scope.activities[i]['duration']) * 20;
+              }
+            }
 					});
         }
 				else{
@@ -454,6 +477,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 		.success(function(data, status, headers) {
       $scope.time     = data.Points[0]['points'];
       var resTimeDay  = parseInt(data.TimeDay[0]['SUM(duration)']);
+      var resTimeWeek = parseInt(data.TimeWeek[0]['SUM(duration)']);
 
       if(!resTimeDay)
         resTimeDay  = 0;
@@ -461,8 +485,16 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
         resTimeDay  = 180;
       }
 
-      //var resDay      = resTimeDay / 180 * 100;
-      $scope.timeDay  = resTimeDay;
+      if(!resTimeWeek)
+        resTimeWeek  = 0;
+      else if(resTimeWeek > 1260) {
+        resTimeWeek  = 1260;
+      }
+
+      $scope.timeDayP   = Math.floor(resTimeDay/1.8);
+      $scope.timeWeekP  = Math.floor(resTimeWeek/12.6);
+      $scope.timeDay    = resTimeDay;
+      $scope.timeWeek   = resTimeWeek;
     });
 		
 		$http.get('http://89.90.16.70/Rovaniemove/API/activities/' + sharedUser.getUserID())
@@ -472,15 +504,11 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
       for (i = 0; i < $scope.activities.length; i ++) {
         if($scope.activities[i]['level'] == 1 || $scope.activities[i]['level'] == '1') {
           $scope.activities[i]['points']  = parseInt($scope.activities[i]['duration']) * 10;
-        } else if($scope.activities[i]['level'] == 2 || $scope.activities[i]['level'] == '2'){
+        } 
+        else if($scope.activities[i]['level'] == 2 || $scope.activities[i]['level'] == '2'){
           $scope.activities[i]['points']  = parseInt($scope.activities[i]['duration']) * 20;
         }
       }
-		});
-
-		$http.get('http://89.90.16.70/Rovaniemove/API/rank/' + sharedUser.getUserID())
-		.success(function(data, status, headers) {
-			$scope.rank = data.Rank;
 		});
 	}
 	
@@ -742,7 +770,6 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 // Events Controller
 .controller('EventsCtrl', function($scope, $http, sharedUser) {
   $scope.durations  = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 150, 180];
-  $scope.name       = "";
   
   $http.get('http://89.90.16.70/Rovaniemove/API/sports')
   .success(function(data, status, headers) {
@@ -771,7 +798,6 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
       $dateTime   = $date.getFullYear() + '-' + $month + '-' + $date.getDate() + ' ' + $date.getHours() + ':' + $date.getMinutes() + ':' + $date.getSeconds();
 
       $params = {
-        'name': $scope.name, 
         'sportID': $scope.sport,
         'datetime': $dateTime, 
         'duration': $scope.duration, 
@@ -784,7 +810,6 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
         if(data.Success == 1) {
           function onConfirm(buttonIndex) {
             if(buttonIndex == 1) {
-              $scope.name     = '';
               $scope.school   = '';
               $scope.duration = '';
             }
@@ -808,6 +833,12 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 	.success(function(data, status, headers) {
     if(data.Success == 1) {
       $scope.tabledata = data.Result;
+
+      for(i = 0; i < $scope.tabledata.length; i++) {
+        if($scope.tabledata[i]['points'] == 0 || $scope.tabledata[i]['points'] == '0' || $scope.tabledata[i]['points'] == null) {
+          $scope.tabledata[i]['points'] = 0;
+        }
+      }
     }
   });
 
@@ -818,6 +849,12 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 		.success(function(data, status, headers) {
       if(data.Success == 1) {
         $scope.tabledata = data.Result;
+
+        for(i = 0; i < $scope.tabledata.length; i++) {
+          if($scope.tabledata[i]['points'] == 0 || $scope.tabledata[i]['points'] == '0' || $scope.tabledata[i]['points'] == null) {
+            $scope.tabledata[i]['points'] = 0;
+          }
+        }
       }        
     });
 	};
@@ -826,6 +863,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 // Settings Controller
 .controller('SettingsCtrl', function($scope, $http, $uibModal, sharedUser, $state) {
 	$scope.admin = sharedUser.getAdmin();
+  $scope.result_feedback  = '';
 	
   var   storage = window.localStorage;
   
@@ -875,6 +913,21 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
       navigator.notification.confirm(data.Message, onConfirm, 'Muokkaa', ['OK']);     
     });
   }
+
+  $scope.onSickChange = function () {
+    $scope.result_sick  = '';
+    var sickState = 0;
+
+    if($scope.sickBox == 1 || $scope.sickBox == '1') {
+      sickState = 1;
+    }
+
+    $http.put('http://89.90.16.70/Rovaniemove/API/sick/' + sickState + '/' + sharedUser.getUserID())
+    .success(function(data, status, headers) {
+      $scope.result_sick  = data.Message;
+      sharedUser.setSick(sickState);
+    });
+  }
 })
 
 // Logout Controller
@@ -895,7 +948,6 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
   $scope.school         = false; //for the class ng-show
   $scope.schoolAddClass = false;
   $scope.sport          = false; //For the activity's name ng-show
-  $scope.name           = "";
  
   $http.get('http://89.90.16.70/Rovaniemove/API/schools')
   .success(function(data, status, headers) {
@@ -938,7 +990,8 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
           'schoolID': $scope.school,
           'classroomID': $scope.classroom,
           'password': $scope.password,
-          'admin': $admin
+          'admin': $admin,
+          'sick': 0
         };
 
         $http.post('http://89.90.16.70/Rovaniemove/API/register', $params)
