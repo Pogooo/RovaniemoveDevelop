@@ -76,7 +76,7 @@
 <!-- 	<h2 ng-click="showActivity = true" style="text-align: center">Saavutukset</h2><br> -->
 	<div height="auto" style="horizontal-align: middle; vertical-align: middle; text-align: center">
 		<div ng-repeat="achivement in achievementsList" id="{{achivement.name}}" class="achivement-medal">
-			<image class="img-responsive" src="img/medal-2.png" /><br>
+			<image ng-click="achivementClick(achivement)" class="img-responsive" src="img/medal-2.png" /><br>
 			<center>{{achivement.name}}</center>
 			<center><i>{{achivement.date  | date:'dd-MM-yyyy'}}</i></center>
 		</div>

@@ -391,7 +391,7 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 })
 
 // Profile Controller
-.controller('ProfileCtrl', function($scope, sharedUser, $http, $state, $stateParams) {	
+.controller('ProfileCtrl', function($scope, sharedUser, $http, $state, $stateParams, $uibModal) {	
 	$scope.showActivity = false;
 	
   $scope.achievementsList   = [];
@@ -413,6 +413,18 @@ angular.module('App', ['ui.router', 'formPosts', 'ngAnimate', 'ui.bootstrap', 'i
 				'-webkit-transform': transform,
 				'font-size': $scope.radius/3.5 + 'px'
 		};
+	};
+	
+	$scope.achivementClick = function(achi){
+		const modalInstance = $uibModal.open({
+				animation: true,
+				template: "<center><img src='img/medal-2.png'/><br><b>" + achi.name + "</b><br>" + achi.date + "<br><i>" + achi.description + "</i></center>",
+				resolve: {
+/* 						syncData: () => syncData,
+						asyncData: () => someWebServices.getAsyncData() */
+				}
+		});
+		return modalInstance;
 	};
 		
 	$scope.searchForAnother = $stateParams.userName;
