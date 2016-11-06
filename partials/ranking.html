@@ -1,7 +1,9 @@
-<ul class="nav nav-tabs nav-justified">
-  <li ng-class="{'active': currenttable == 'class'}"><a ng-click="tableChange('class')">Luokka</a></li>
-  <li ng-class="{'active': currenttable == 'school'}"><a ng-click="tableChange('school')">Koulu</a></li>
+<div style="text-align: center">
+<ul class="nav nav-tabs navbar-justify">
+  <li style="width: 49%" ng-class="{'active': currenttable == 'class'}"><a ng-click="tableChange('class')">Luokka</a></li>
+  <li style="width: 49%" ng-class="{'active': currenttable == 'school'}"><a ng-click="tableChange('school')">Koulu</a></li>
 </ul>
+</div>
 <table id="rankingtable" class="table table-striped">
 <thead>
 	<tr class="rankingName">
