@@ -7,9 +7,9 @@
         <li ng-class="{'active': currenttable == 'sport'}"><a ng-click="tableChange('sport')">Liikunta</a></li>
         <li ng-class="{'active': currenttable == 'achievement'}"><a ng-click="tableChange('achievement')">Saavutukset</a></li>
     </ul>
-    <div>
-        <div class="list-group" ng-repeat="entity in itemsList | orderBy: '-name'">
-            <button type="button" class="list-group-item" ng-click="onItemClick(entity.id)">{{entity.name}}</button>
-        </div>
-    </div>
+        <table class="table table-striped col-xs-12">
+					<tr class="list-group" ng-repeat="entity in itemsList | orderBy: '-name'">
+            <td ng-click="onItemClick(entity.id)"><a>{{entity.name}}</a></td>
+					</tr>
+        </table>
 </div>

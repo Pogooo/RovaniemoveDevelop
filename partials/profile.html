@@ -95,7 +95,7 @@
 		<i ng-show="(weekcurrent / activityweek.score * 100) >= 100" class="fa fa-thumbs-up" aria-hidden="true"></i>
 		</span>
 	</p>
-	<p>
+	<p ng-hide="minWeek == maxWeek">
 		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == minWeek" ng-click="weekPick = weekPick - 1; getActivities(weekPick)">Last week</button> 
 		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == maxWeek" ng-click="weekPick = weekPick + 1; getActivities(weekPick)">Next week</button>
 	</p>
