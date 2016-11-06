@@ -1,3 +1,75 @@
+/* progress bar */
+
+.ng-cloak{
+    display: none;
+}
+.progresscircle{
+    position: absolute;
+    color: #bbb;
+    font-weight: 100;
+    line-height: 1;
+}
+
+
+.fill{
+	vertical-align: middle !important;
+}
+
+  .row.table-row > [class*="col-"].custom {
+    background-color: lightgrey;
+    text-align: center;
+  }
+
+
+@media (min-width: 768px) {
+  
+  img.img-fluid {width:100%;}
+
+  .row.table-row {display:table;width:100%;margin:0 auto;}
+
+  .row.table-row > [class*="col-"] {
+    float:none;
+    float:none;
+    display:table-cell;
+    vertical-align:top;
+  }
+
+  .row.table-row > .col-sm-11 {
+    width: 91.66666666666666%;
+  }
+  .row.table-row > .col-sm-10 {
+    width: 83.33333333333334%;
+  }
+  .row.table-row > .col-sm-9 {
+    width: 75%;
+  }
+  .row.table-row > .col-sm-8 {
+    width: 66.66666666666666%;
+  }
+  .row.table-row > .col-sm-7 {
+    width: 58.333333333333336%;
+  }
+  .row.table-row > .col-sm-6 {
+    width: 50%;
+  }
+  .col-sm-5 {
+    width: 41.66666666666667%;
+  }
+  .col-sm-4 {
+    width: 33.33333333333333%;
+  }
+  .row.table-row > .col-sm-3 {
+    width: 25%;
+  }
+  .row.table-row > .col-sm-2 {
+    width: 16.666666666666664%;
+  }
+  .row.table-row > .col-sm-1 {
+    width: 8.333333333333332%;
+  }
+
+
+}
 h2{
 	color: #44A550;
 }
@@ -11,11 +83,12 @@ a:hover, a:active {
 	width: 120px;
 	display: inline-block;
 }
-.btn-primary{
+.btn-rova{
 	background-color: green;
 	border-color: green;
+	color: white;
 }
-.btn-primary:hover, .btn-primary:active:focus, .btn-primary:active, .btn-primary:focus{
+.btn-rova:hover, .btn-rova:active:focus, .btn-rova:active, .btn-rova:focus{
 	background-color: #64B058;
 	border-color: #64B058;
 }
@@ -51,7 +124,10 @@ a:hover, a:active {
 	margin-bottom: 12px;
 }
 #username{
-	font-size: 100%;
+	font-size: 120%;
+}
+.biggerfont{
+	font-size: 120%;
 }
 .dropzone {
   min-height: 150px;

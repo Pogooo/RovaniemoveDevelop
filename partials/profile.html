@@ -7,22 +7,27 @@
 </div>
 <hr>
 <div class="row">
-	<div class="col-md-4 col-xs-5">
+	<div class="col-sm-4 col-xs-5">
 		<input type="image" id="profilePicture" class="img-responsive" ng-click="onClickPicture()" width="200" height="200"><br>
 	</div>
-	<div style="text-align: center" class="col-md-4 col-xs-7">
+	<div style="text-align: center" class="col-sm-4 col-xs-7">
 		<p><span id="username" style="font-weight: bold">{{username}}</span> 
 			<span ng-if="searchForAnother != ''" ui-sref="user.profile({userName: ''})">
 				<i class="fa fa-sign-out" aria-hidden="true"></i>
 			</span>
 		</p>
 		<p>
-			<span ng-hide="time == $0">{{time}} Pisteet</span>
-			<span ng-show="time == $0">0 Pisteet</span>
+			<span ng-hide="time == $0"><i>{{time}} Pisteet</i></span>
+			<span ng-show="time == $0"><i>0 Pisteet</i></span>
+		</p>
+		<p>
+			Liikunta tänään<br>
+		 <uib-progressbar max="100" class="progress-striped active" value="timeDayP" style="width: 100%" type="success">{{timeDayP}}%</uib-progressbar>
 		</p>
 	</div>
-	<div style="text-align: center" class="col-md-4 col-xs-12"><br>
-		<div class="col-md-6"> Liikunta tänään: {{timeDay}}" ({{timeDayP}}%)
+	<div style="text-align: center" class="col-sm-4 col-xs-12">
+<!-- 		<div class="col-md-6"> Liikunta tänään: {{timeDay}}" ({{timeDayP}}%)
+		 <div class="progress ng-cloak" ng-style="getStyle()">{{ timeDay }}/180</div>
 			<round-progress
 				max="180"
 				current="timeDay"
@@ -37,9 +42,13 @@
 				animation="easeInOutQuart"
 				animation-delay="0">
 			</round-progress>
-		</div>
+		</div> -->
 
-		<div class="col-md-6"> Liikunta viikko: {{timeWeek}}" ({{timeWeekP}}%)
+		<!-- Liikunta viikko: {{timeWeek}}" ({{timeWeekP}}%) -->
+		<div>
+			Liikunta viikko <!-- {{timeWeek}}" ({{timeWeekP}}%) -->
+		</div>
+		<div class="progresscircle ng-cloak" ng-style="getStyle()">{{ timeWeekP }}/ 100</div>
 			<round-progress
 				max="1260"
 				current="timeWeek"
@@ -54,22 +63,40 @@
 				animation="easeInOutQuart"
 				animation-delay="0">
 			</round-progress>
-		</div>
 	</div>
 </div>
 <hr>
+<ul class="nav nav-tabs">
+  <li style="width: 49%" ng-class="{'active': showActivity == false}"><a ng-click="showActivity = false"><center>Saavutukset</center></a></li>
+  <li style="width: 49%" ng-class="{'active': showActivity == true}"><a ng-click="showActivity = true"><center>Aktiviteetti</center></a></li>
+</ul>
 <div ng-hide="showActivity">
-	<h2 ng-click="showActivity = true" style="text-align: center">Saavutukset</h2><br>
+<!-- 	<h2 ng-click="showActivity = true" style="text-align: center">Saavutukset</h2><br> -->
 	<div height="auto" style="horizontal-align: middle; vertical-align: middle; text-align: center">
 		<div ng-repeat="achivement in achievementsList" id="{{achivement.name}}" class="achivement-medal">
 			<image class="img-responsive" src="img/medal-2.png" /><br>
-			<center>{{achivement.name}}</center><br>
-			<center><i>{{achivement.date}}</i></center>
+			<center>{{achivement.name}}</center>
+			<center><i>{{achivement.date  | date:'dd-MM-yyyy'}}</i></center>
 		</div>
 	</div>
 </div>
 <div ng-show="showActivity">
-	<h2 ng-click="showActivity = false" style="text-align: center">Aktiviteetti</h2><br>
+<!-- 	<h2 ng-click="showActivity = false" style="text-align: center">Aktiviteetti</h2> -->
+	<p style="text-align: center">
+		{{weekcurrent}} p.<span ng-hide="weekPick == maxWeek">
+		<span ng-show="weekcurrent > activityweek.score">></span>
+		<span ng-show="weekcurrent == activityweek.score">=</span>
+		<span ng-show="weekcurrent < activityweek.score"><</span> 
+		{{activityweek.score}} p.
+		<i class="fa fa-arrow-right" aria-hidden="true"></i>
+		<span >{{weekcurrent / activityweek.score * 100 | number: 0}}%</span>
+		<i ng-show="(weekcurrent / activityweek.score * 100) >= 100" class="fa fa-thumbs-up" aria-hidden="true"></i>
+		</span>
+	</p>
+	<p>
+		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == minWeek" ng-click="weekPick = weekPick - 1; getActivities(weekPick)">Last week</button> 
+		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == maxWeek" ng-click="weekPick = weekPick + 1; getActivities(weekPick)">Next week</button>
+	</p>
 	<table id="activitiestable" class="table table-striped">
 	<thead>
 		<tr class="rankingName" style="text-align: center" style="font-size: 90%">
@@ -79,15 +106,15 @@
 			<td>Päivä</td>
 		</tr>
 	</thead>
-	<tbody style="font-size: 90%">
-		<tr ng-repeat="entity in activities | orderBy: '-datetime'">
+	<tbody ng-repeat="entity in activities | orderBy: '-datetime'" style="font-size: 90%">
+		<tr>
 			<td style="text-align: center">
 				<span> {{entity.sportName}}
 				</span>
 			</td>
 			<td style="text-align: center">{{entity.points}}</td>
 			<td style="text-align: center">{{entity.duration}}</td>
-			<td style="text-align: center">{{entity.datetime}}</td>
+			<td style="text-align: center">{{entity.datetime | date:'dd-MM-yyyy'}}</td>
 		</tr>
 	</tbody>
 	</table>
