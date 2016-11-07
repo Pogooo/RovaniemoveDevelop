@@ -26,25 +26,6 @@
 		</p>
 	</div>
 	<div style="text-align: center" class="col-sm-4 col-xs-12">
-<!-- 		<div class="col-md-6"> Liikunta tänään: {{timeDay}}" ({{timeDayP}}%)
-		 <div class="progress ng-cloak" ng-style="getStyle()">{{ timeDay }}/180</div>
-			<round-progress
-				max="180"
-				current="timeDay"
-				color="#64B058"
-				bgcolor="#eaeaea"
-				stroke="5"
-					radius="50"
-				rounded="true"
-				clockwise="true"
-				responsive="false"
-				duration="800"
-				animation="easeInOutQuart"
-				animation-delay="0">
-			</round-progress>
-		</div> -->
-
-		<!-- Liikunta viikko: {{timeWeek}}" ({{timeWeekP}}%) -->
 		<div>
 			Liikunta viikko <!-- {{timeWeek}}" ({{timeWeekP}}%) -->
 		</div>
@@ -96,8 +77,8 @@
 		</span>
 	</p>
 	<p ng-hide="minWeek == maxWeek">
-		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == minWeek" ng-click="weekPick = weekPick - 1; getActivities(weekPick)">Last week</button> 
-		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == maxWeek" ng-click="weekPick = weekPick + 1; getActivities(weekPick)">Next week</button>
+		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == minWeek" ng-click="weekPick = weekPick - 1; getActivities(weekPick)">Viime viikko</button> 
+		<button class="btn btn-rova col-xs-6" ng-disabled="weekPick == maxWeek" ng-click="weekPick = weekPick + 1; getActivities(weekPick)">Luluvan viikon</button>
 	</p>
 	<table id="activitiestable" class="table table-striped">
 	<thead>

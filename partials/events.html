@@ -1,4 +1,5 @@
 <form id="loginForm">
+	<!--<div id="form-group" ng-show="sick == 0">-->
 	<div id="form-group">			
 		<label for="newsportselect">Liikunta</label>
 		<select id="newsportselect" class="form-control" ng-model="sport" ng-options="sport.sportID as sport.name for sport in sportsList"></select><br>
@@ -14,4 +15,7 @@
 		{{result}}
 		<input type="button" class="btn btn-rova btn-block" value="Lisää aktiviteetti" ng-click="onAddClick()"/>
 	</div>
+	<!--<div ng-show="sick == 1">
+		Olet sairas
+	</div>-->
 </form>	

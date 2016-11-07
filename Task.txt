@@ -1,3 +1,1 @@
-- School and Classroom rank in minutes not in points (server side) 
-- In setting page add mode sick
-- In admin page delete fix space between cell in list
+- In setting page add mode sick (Jordy)
